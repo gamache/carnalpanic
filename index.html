@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang=en>
+<title>Carnal Panic</title>
+<link rel="stylesheet" href="style.css">
+
+<div class=ascii-wrapper role=img aria-label="Carnal Panic">
+<img class=left-header src="upsidedownburningcross.gif">
+<div class=ascii>
+░█▀▀░█▀█░█▀▄░█▀█░█▀█░█░░░░░█▀█░█▀█░█▀█░▀█▀░█▀▀<br/>░█░░░█▀█░█▀▄░█░█░█▀█░█░░░░░█▀▀░█▀█░█░█░░█░░█░░<br/>░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░░░▀░░░▀░▀░▀░▀░▀▀▀░▀▀▀<br/>
+</div>
+<img class=right-header src="upsidedownburningcross.gif">
+</div>
+
+<p>Hello everyone. this is <i>dumb</i> innit? fuck <b>you</b>
+
+1234567890__________1234567890__________1234567890__________1234567890__________1234567890__________
+
+
+  <article>
+	<p><a href="//engineering.appcues.com/2016/02/02/too-many-dicts.html" target="_blank">Our last blog post</a>
+talked about
+<a href="https://github.com/appcues/exconstructor" target="_blank">ExConstructor</a>,
+a tool we wrote at Appcues to make it
+incredibly easy to turn data from the outside world into structs.
+We’re pleased to announce
+<a href="https://github.com/appcues/exconstructor" target="_blank">ExConstructor</a>
+version 1.0 to the Elixir community!</p>
+
+<!--more-->
+
+<p>Elixir structs are a great way to represent data in your apps, but there
+is often an impedance mismatch between structs and the data used to
+initialize them.  Often, a programmer must compensate for key data type
+(string or atom), key formatting (under_score or camelCase), and
+container data structure (map, keyword list, list of tuples).</p>
+
+<p><a href="https://github.com/appcues/exconstructor" target="_blank">ExConstructor</a>
+gets all this
+out of your way.  Add <code class="language-plaintext highlighter-rouge">use ExConstructor</code> after a <code class="language-plaintext highlighter-rouge">defstruct</code> expression
+to generate a constructor function that handles atoms vs strings,
+under_score vs camelCase, and map vs list issues automatically.</p>
+
+<h2 id="why-exconstructor">Why ExConstructor?</h2>
+
+<p>As discussed in
+<a href="//engineering.appcues.com/2016/02/02/too-many-dicts.html" target="_blank">our last post</a>,
+it’s good practice to write functions that use structs instead of generic
+maps or keyword lists, because your functions
+become clearer in their intent (what kind of data do they deal with?
+what’s it look like?) and usage (precisely what arguments am I allowed
+to give?).</p>
+
+<p>Elixir doesn’t make it easy to create structs from data which doesn’t
+already perfectly match the struct, but <code class="language-plaintext highlighter-rouge">ExConstructor</code> does.  Here is
+a small example:</p>
+
+<figure class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="k">defmodule</span> <span class="no">TestStruct</span> <span class="k">do</span>
+  <span class="k">defstruct</span> <span class="ss">field_one:</span> <span class="no">nil</span><span class="p">,</span>
+			<span class="ss">field_two:</span> <span class="no">nil</span><span class="p">,</span>
+			<span class="ss">field_three:</span> <span class="no">nil</span><span class="p">,</span>
+			<span class="ss">field_four:</span> <span class="no">nil</span>
+  <span class="kn">use</span> <span class="no">ExConstructor</span>
+<span class="k">end</span>
+
+<span class="c1"># Unruly data. There's atoms, there's strings, there's camels, there's snakes!</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="p">%{</span><span class="s2">"field_one"</span> <span class="o">=&gt;</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"fieldTwo"</span> <span class="o">=&gt;</span> <span class="s2">"b"</span><span class="p">,</span> <span class="ss">:field_three</span> <span class="o">=&gt;</span> <span class="s2">"c"</span><span class="p">,</span> <span class="ss">:fieldFour</span> <span class="o">=&gt;</span> <span class="s2">"d"</span><span class="p">}</span>
+
+<span class="no">TestStruct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+<span class="c1"># =&gt; %TestStruct{field_one: "a", field_two: "b", field_three: "c", field_four: "d"}</span>
+<span class="c1"># Oh my phear ***IT JUST WORKS***</span></code></pre></figure>
+
+<h2 id="why-not-just-use-native-elixir">Why Not Just Use Native Elixir?</h2>
+
+<p>It sounds almost too simple. The task of creating structs may seem to be
+so trivial that the gains from doing so are barely worth adding a dependency
+to your app.</p>
+
+<p>This is almost true.
+<a href="https://github.com/appcues/exconstructor/blob/master/lib/exconstructor.ex" target="_blank">There’s only about 100 lines of code</a>
+in ExConstructor.</p>
+
+<p>So, really, what can ExConstructor do that e.g.,
+<code class="language-plaintext highlighter-rouge">struct(TestStruct, your_input_here)</code> can’t?  A table will hammer it home.</p>
+
+<table>
+  <thead>
+	<tr>
+	  <th>Data Structure</th>
+	  <th> </th>
+	  <th>Key Type</th>
+	  <th> </th>
+	  <th>Key Format</th>
+	  <th> </th>
+	  <th style="text-align: center">Native</th>
+	  <th style="text-align: center"> </th>
+	  <th style="text-align: center">ExConstructor</th>
+	</tr>
+  </thead>
+  <tbody>
+	<tr>
+	  <td>Map</td>
+	  <td> </td>
+	  <td>Atom</td>
+	  <td> </td>
+	  <td>under_score</td>
+	  <td> </td>
+	  <td style="text-align: center">✔</td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>Map</td>
+	  <td> </td>
+	  <td>Atom</td>
+	  <td> </td>
+	  <td>camelCase</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>Map</td>
+	  <td> </td>
+	  <td>String</td>
+	  <td> </td>
+	  <td>under_score</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>Map</td>
+	  <td> </td>
+	  <td>String</td>
+	  <td> </td>
+	  <td>camelCase</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>Keyword list</td>
+	  <td> </td>
+	  <td>Atom</td>
+	  <td> </td>
+	  <td>under_score</td>
+	  <td> </td>
+	  <td style="text-align: center">✔</td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>Keyword list</td>
+	  <td> </td>
+	  <td>Atom</td>
+	  <td> </td>
+	  <td>camelCase</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>2-Tuple list</td>
+	  <td> </td>
+	  <td>String</td>
+	  <td> </td>
+	  <td>under_score</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+	<tr>
+	  <td>2-Tuple list</td>
+	  <td> </td>
+	  <td>String</td>
+	  <td> </td>
+	  <td>camelCase</td>
+	  <td> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center"> </td>
+	  <td style="text-align: center">✔</td>
+	</tr>
+  </tbody>
+</table>
+
+<p><br />
+If you handle any of the data formats without a checkbox in the Native
+column, you should look at ExConstructor.  It’s not that you couldn’t do it
+yourself – it’s that you are going to do it yourself hundreds of times.</p>
+
+<h2 id="try-it">Try It</h2>
+
+<p><a href="http://hexdocs.pm/exconstructor/ExConstructor.html" target="_blank">Full documentation for ExConstructor</a>
+is available on <a href="http://hexdocs.pm" target="_blank">Hexdocs.pm</a>,
+including installation and configuration instructions.  Give it a try,
+DRY up your code, and spend more time on interesting work!</p>
+
+
+  </article>
+
+<h1>Header 1</h1>
+
+You are still stupid
+
+<h2>Header 2</h2>
+
+Lol
+
+DL:
+<dl>
+<dt>Poop</dt>
+<dd>the stuff that comes out of a butt</dd>
+<dt>Pee</dt>
+<dd>Like poop but from your wiener</dd>
+</dl>
+
+UL:
+<ul>
+	<li>Pee</li>
+	<li>Poo</li>
+	<li>Caca</li>
+</ul>
+
+OL:
+<ol>
+	<li>Pee</li>
+	<li>Poo</li>
+	<li>Caca</li>
+	<li>Pee</li>
+	<li>Poo</li>
+	<li>Caca</li>
+	<li>Pee</li>
+	<li>Poo</li>
+	<li>Caca</li>
+	<li>Pee</li>
+	<li>Poo</li>
+	<li>Caca</li>
+</ol>
+
+<h1>HTML Ipsum Presents</h1>
+
+<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+<h2>Header Level 2</h2>
+
+<ol>
+   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+   <li>Aliquam tincidunt mauris eu risus.</li>
+</ol>
+
+<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+<h3>Header Level 3</h3>
+
+<ul>
+   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+   <li>Aliquam tincidunt mauris eu risus.</li>
+</ul>
+
+<pre><code>#header h1 a {
+  display: block;
+  width: 300px;
+  height: 80px;
+}
+</code></pre>

@@ -1,0 +1,130 @@
+/* solarized theme from https://gist.github.com/x-zvf/a8b84f5e8065e39cab68e725c4dd1255 */
+:root {
+	--base03: #002b36; /* dark background */
+	--base02: #073642; /* dark background */
+	--base01: #586e75; /* content */
+	--base00: #657b83; /* content */
+	--base0: #839496;  /* content */
+	--base1: #93a1a1;  /* content */
+	--base2: #eee8d5;  /* light background */
+	--base3: #fdf6e3;  /* light background */
+	--yellow: #b58900;
+	--orange: #cb4b16;
+	--red: #dc322f;
+	--magenta: #d33682;
+	--violet: #6c71c4;
+	--blue: #268bd2;
+	--cyan: #2aa198;
+	--green: #859900;
+}
+
+html {
+	background-image: url(dinner.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+body {
+	background-color: var(--base03);
+	color: var(--base0);
+
+	/* one char width is about 0.6em */
+	max-width: 48.5em; /* fits 80 chars */
+	margin: 0 auto;
+	padding: 1em;
+}
+body,code,pre {
+	font-family: "Lucida Sans Typewriter", "Lucida Console", "Monaco", "Andale Mono", "Consolas", monospace;
+	overflow-wrap: break-word;
+}
+* {
+	font-size: 17px !important;
+}
+
+.blink,blink {
+	animation: blink 2s step-start infinite;
+}
+@keyframes blink {
+	50% { opacity: 0; }
+}
+
+.ascii-wrapper {
+	text-align: center;
+}
+.ascii {
+	text-align: center;
+	font-family: "Courier New", "Courier", monospace;
+	line-height: 1.1;
+	padding: 0 0 2em 0;
+	display: inline-block;
+
+}
+img.left-header,img.right-header {
+	width: 40px;
+	height: 80px;
+	display: inline-block;
+	position: relative;
+	top: 1em;
+	margin: 0 1.2em;
+}
+
+h1,h2,h3,h4,h5,b,strong,code,i,em {
+	font-style: normal;
+	text-emphasis-style: none;
+	color: var(--base1);
+}
+h1:before { content: "# "; }
+h2:before { content: "## "; }
+h3:before { content: "### "; }
+h1,h2,h3,b,strong,i,em {
+	font-weight: 700;
+}
+code { font-weight: 500; }
+
+ul,ol {
+	padding-left: 0;
+}
+ul > li {
+	list-style-type: none;
+}
+ul > li:before {
+	content: "* ";
+}
+ol > li {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+dt:before {
+	content: "* ";
+}
+dt:after {
+	content: ":";
+}
+dd {
+	margin-left: 1.2em;
+}
+
+pre {
+	padding: 0.6em;
+	border: 1px solid var(--green);
+}
+blockquote {
+	padding: 0.6em;
+	margin: 0 0.6em;
+}
+
+a { color: var(--blue); }
+a:active { color: var(--red); }
+a:visited { color: var(--violet); }
+
+th,td {
+	padding: 0 0.3em;
+}
+
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: var(--base2);
+		color: var(--base00);
+	}
+	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base01); }
+}
