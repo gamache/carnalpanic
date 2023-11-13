@@ -1,4 +1,5 @@
-/* solarized theme from https://gist.github.com/x-zvf/a8b84f5e8065e39cab68e725c4dd1255 */
+/* solarized theme variables are sourced from
+   https://gist.github.com/x-zvf/a8b84f5e8065e39cab68e725c4dd1255 */
 :root {
 	--base03: #002b36; /* dark background */
 	--base02: #073642; /* dark background */
@@ -17,6 +18,22 @@
 	--cyan: #2aa198;
 	--green: #859900;
 }
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: var(--base2);
+		color: var(--base00);
+	}
+	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base01); }
+	pre,code { background-color: var(--base3); }
+}
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: var(--base02);
+		color: var(--base0);
+	}
+	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base1); }
+	pre,code { background-color: var(--base03); }
+}
 
 html {
 	background-image: url(dinner.jpg);
@@ -25,11 +42,9 @@ html {
 	background-position: center;
 }
 body {
-	background-color: var(--base03);
-	color: var(--base0);
-
 	/* one char width is about 0.6em */
 	max-width: 48.5em; /* fits 80 chars */
+	min-height: 100vh;
 	margin: 0 auto;
 	padding: 1em;
 }
@@ -46,6 +61,10 @@ body,code,pre {
 }
 @keyframes blink {
 	50% { opacity: 0; }
+}
+
+.center {
+	text-align: center;
 }
 
 .ascii-wrapper {
@@ -66,12 +85,12 @@ img.left-header,img.right-header {
 	position: relative;
 	top: 1em;
 	margin: 0 1.2em;
+	display: none;
 }
 
 h1,h2,h3,h4,h5,b,strong,code,i,em {
 	font-style: normal;
 	text-emphasis-style: none;
-	color: var(--base1);
 }
 h1:before { content: "# "; }
 h2:before { content: "## "; }
@@ -119,12 +138,4 @@ a:visited { color: var(--violet); }
 
 th,td {
 	padding: 0 0.3em;
-}
-
-@media (prefers-color-scheme: light) {
-	body {
-		background-color: var(--base2);
-		color: var(--base00);
-	}
-	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base01); }
 }
