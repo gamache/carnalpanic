@@ -43,17 +43,21 @@ html {
 }
 body {
 	/* one char width is about 0.6em */
-	max-width: 48.5em; /* fits 80 chars */
+	max-width: 49.5em; /* aimed so a <pre> fits 80 chars */
 	min-height: 100vh;
 	margin: 0 auto;
 	padding: 1em;
+	overflow-wrap: break-word;
 }
 body,code,pre {
 	font-family: "Lucida Sans Typewriter", "Lucida Console", "Monaco", "Andale Mono", "Consolas", monospace;
-	overflow-wrap: break-word;
+}
+pre {
+	overflow-wrap: normal;
+	overflow: auto;
 }
 * {
-	font-size: 17px !important;
+	font-size: 16px !important;
 }
 
 .blink,blink {
@@ -67,29 +71,14 @@ body,code,pre {
 	text-align: center;
 }
 
-.ascii-wrapper {
-	text-align: center;
-}
 .ascii {
 	text-align: center;
 	font-family: "Courier New", "Courier", monospace;
 	line-height: 1.1;
-	padding: 0 0 2em 0;
-	display: inline-block;
-
-}
-img.left-header,img.right-header {
-	width: 40px;
-	height: 80px;
-	display: inline-block;
-	position: relative;
-	top: 1em;
-	margin: 0 1.2em;
-	display: none;
+	padding-bottom: 2em;
 }
 
-h1,h2,h3,h4,h5,b,strong,code,i,em {
-	font-style: normal;
+h1,h2,h3,h4,h5,b,strong,code {
 	text-emphasis-style: none;
 }
 h1:before { content: "# "; }
@@ -126,6 +115,7 @@ dd {
 pre {
 	padding: 0.6em;
 	border: 1px solid var(--green);
+	white-space: pre-wrap;
 }
 blockquote {
 	padding: 0.6em;
