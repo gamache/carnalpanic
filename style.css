@@ -57,7 +57,7 @@ pre {
 	overflow: auto;
 }
 * {
-	font-size: 16px !important;
+	font-size: 16px; /* !important; */
 }
 
 .blink,blink {
@@ -76,6 +76,11 @@ pre {
 	font-family: "Courier New", "Courier", monospace;
 	line-height: 1.1;
 	padding-bottom: 2em;
+}
+@media screen and (max-width: 767px) {
+  .ascii {
+    font-size: 12px;
+  }
 }
 
 h1,h2,h3,h4,h5,b,strong,code {
