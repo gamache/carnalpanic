@@ -22,6 +22,7 @@
 	body {
 		background-color: var(--base2);
 		color: var(--base00);
+		opacity: 97%;
 	}
 	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base01); }
 	pre,code { background-color: var(--base3); }
@@ -30,6 +31,7 @@
 	body {
 		background-color: var(--base02);
 		color: var(--base0);
+		opacity: 97%;
 	}
 	h1,h2,h3,h4,h5,b,strong,code,i,em { color: var(--base1); }
 	pre,code { background-color: var(--base03); }
@@ -62,7 +64,7 @@ pre {
 	overflow: auto;
 }
 * {
-	font-size: 16px; /* !important; */
+	font-size: 16px;
 }
 
 .blink,blink {
@@ -83,11 +85,10 @@ pre {
 	padding-bottom: 2em;
 }
 @media screen and (max-width: 767px) {
-  .ascii {
-    font-size: 12px;
-  }
+	.ascii {
+		font-size: 12px;
+	}
 }
-
 h1,h2,h3,h4,h5,b,strong,code {
 	text-emphasis-style: none;
 }
@@ -141,5 +142,5 @@ th,td {
 }
 
 /* Handy defaults for iPhone images */
-img.horiz { width: 403; height: 302 }
-img.vert { width: 302; height: 403; }
+img.horiz { width: 403px; height: 302px; max-width: 100%; object-fit: contain; }
+img.vert { width: 302px; height: 403px; max-width: 100%; object-fit: contain; }
