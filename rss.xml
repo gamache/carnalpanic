@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<rss version="2.0">
+	<channel>
+		<title>Carnal Panic</title>
+		<link>https://petegamache.com/</link>
+		<description>Pete Gamache's website</description>
+		<image>
+			<url>https://petegamache.com/dinner100.jpg</url>
+			<link>https://petegamache.com/</link>
+		</image>
+	
+		<item>
+			<title>2024 Cured Meats Project</title>
+			<link>https://petegamache.com/2024-cured-meats/</link>
+			<description>Curing and smoking ham and bacon</description>
+		</item>
+	</channel>
+</rss>
